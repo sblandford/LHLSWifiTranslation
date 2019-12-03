@@ -26,12 +26,18 @@ cd ffmpeg
 
 docker-compose build
 
+
 # To use
 
 ## Start the Dockers
 docker-compose up
 
-## Send an audio source to the LHLS transcoder
+# To Test with test tones
+
+Run the test-tones.sh file to create sine wave test tones on each translation channel. Any recent version of FFmpeg can be used for this.
+
+
+## Send a real audio source to the LHLS transcoder
 
 The transcoders listen for RTP packets as input since this is the most practical way I could think of to get audio into the Docker.
 
