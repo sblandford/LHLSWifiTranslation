@@ -60,6 +60,9 @@ This is an example of a Linux audio source. In this case we would get the "Spani
 ffmpeg -f alsa -ac 1 -ar 44100 -i plughw:1 -fflags nobuffer -flags low_delay -c:a pcm_s16be -ar 44100 -f rtp rtp://192.168.210.90:10004
 ```
 
+# To listen
+Visit the IP of the Docker host with a web brower on port 8080. There is a "QR" button to produce a QR code of the web player which can be printed or shared on-screen. Do not print this from "localhost" or the QR code will be useless to any browser except the one running on the Docker host.
+
 # To customise
 
 The most common settings are in the docker-compose.yml file.
