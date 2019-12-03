@@ -1,0 +1,16 @@
+version: '3'
+services:
+    lhls_web_server:
+        container_name: lhls_web_server
+        build:  "./lhls_web_server"
+        ports:
+            -   "8080:80/tcp"
+        tmpfs: /var/www/html/lhls/audio/data
+    lhls_encoder:
+        container_name: lhls_encoder
+        build:  "lhls_encoder"
+        ports:
+            -   "10000-10020:10000-10020/udp"
+        environment:
+            -   WEBSERVER=lhls_web_server
+            -   LANGUAGES=English,French,Spanish,Tamil,Russian,Portugese,Korean,Japanese,Dutch,German

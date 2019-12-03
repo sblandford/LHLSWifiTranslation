@@ -1,0 +1,20 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_METHOD} =DELETE [OR]
+RewriteCond %{REQUEST_METHOD} =PUT
+RewriteRule ^.*?(\?.*)?$ index.php$1
+
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule (.*) data/$1 [L]
+
+ExpiresActive On
+ExpiresDefault A4
+ExpiresByType application/x-mpegurl now
+ExpiresByType application/vnd.apple.mpegurl now
+ExpiresByType application/dash+xml now
+
+Header always set X-Cache-ttl 0.25s "expr=%{CONTENT_TYPE} == 'application/x-mpegurl'"
+Header always set X-Cache-ttl 0.25s "expr=%{CONTENT_TYPE} == 'application/vnd.apple.mpegurl'"
+Header always set X-Cache-ttl 0.25s "expr=%{CONTENT_TYPE} == 'application/dash+xml'"
+

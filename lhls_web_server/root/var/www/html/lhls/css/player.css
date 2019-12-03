@@ -1,0 +1,307 @@
+.playing {
+    background-color : lightgreen;
+}
+.errorState {
+    background-color : lightgoldenrodyellow;
+}
+
+body.body {
+    background-color : black;
+    color: white;
+}
+
+/* Main page */
+div.page {
+    position : absolute;
+    width: 95vw;
+    max-width : 50em;
+}
+
+/* Main UI */
+table.ui, th.ui, td.ui  {
+    width : 100%;
+}
+table.ui {
+    height: 80vh;
+}
+div.ui {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button.ui {
+
+}
+
+/* Top section */
+/* Dropdown Button */
+.dropbtn {
+    /*background-color: DodgerBlue ; */
+    background-color: Black;
+    color: white;
+    padding: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    min-width: 10em;
+    /*border: none;*/
+    border: 0.2em solid DodgerBlue;
+    
+    cursor: pointer;
+}
+/* Dropdown button on hover & focus */
+.dropbtn:active {
+    background-color: #2980B9;
+}
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    top: 100%;
+    display: none;
+    position: absolute;
+    background-color: DarkBlue;
+    min-width: 15em;
+    box-shadow: 0em 0.5em 1em 0em rgba(0,0,0,0.2);
+    z-index: 1;
+    border: 0.2em solid DodgerBlue;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+    padding: 0.75em 1em;
+    text-decoration: none;
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:active {
+    background-color: blue;
+}
+.dropdown-content a:hover {
+    background-color: blue;
+}
+/* Show a disabled channel */
+.disabled {
+    pointer-events:none;
+    opacity:0.6;
+}
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+    display:block !important;
+}
+
+
+/* Middle section */
+/*Channel display */
+.chName {
+    font-weight : bold;
+    font-size : 2em;
+}
+.chNameDead {
+    color: gray;
+}
+
+/* Stats section */
+tr.stat {
+    height:3em;
+}
+div.stat {
+    /* display : none; */
+    /* font-family: monospace; */
+}
+
+
+/* Lowest section */
+/* Start/Stop Button */
+.startStopBtn {
+    /*background-color: DodgerBlue ;*/
+    padding: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    min-width: 10em;
+    /*border: none; */
+    cursor: pointer;
+    border: 0.2em solid DodgerBlue;
+    background-color: Black;
+    color: white;
+}
+/* Start/stop button on hover & focus */
+.startStopBtn:active {
+    background-color: #2980B9;
+}
+.startStopBtn:disabled {
+    color: GrayText;
+}
+
+
+/* Floating QR code button */
+.qrDiv {
+    position : absolute;
+    top : 5%;
+    right : 2%;
+}
+/* QR code button */
+.qrBtn {
+    padding: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    /* border: none; */
+    cursor: pointer;
+    border: 0.2em solid DodgerBlue;
+    background-color: Black;
+    color: white;
+}
+/* QR code button on hover & focus */
+.qrBtn:active {
+    background-color: #2980B9;
+}
+.qrShow {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+/* QR code display box*/
+.qrBox {
+    opacity: 0;
+    display: block;
+    visibility: hidden;
+    z-index: 1;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    box-shadow: 0em 0.5em 1em 0em rgba(0,0,0,0.2);
+}
+/* QR Object */
+.qrObj {
+    max-width : 50em;
+}
+
+
+/* Geo Confirmation Request */
+.geoBox {
+    width : 80%;
+    height : 80%;
+    opacity: 0;
+    display: block;
+    visibility: hidden;
+    z-index: 1;
+    background-color: MidnightBlue;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    box-shadow: 0em 0.5em 1em 0em rgba(0,0,0,0.2);
+}
+.geoShow {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.geoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;    
+}
+.geoBoxText {
+    font-size : 2em;
+    text-align: center;
+}
+.geoBtn {
+    background-color: DodgerBlue ;
+    color: white;
+    padding: 1em;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    text-align : center;
+}
+/* Geo button on hover & focus */
+.geoBtn:active {
+    background-color: #2980B9;
+}
+
+/* Floating App link button */
+/* The animation code */
+@keyframes appBtnAnim {
+    0%   {border: 2px solid red;}
+    25%  {border: 2px solid green;}
+    50%  {border: 2px solid blue;}
+    100% {border: 2px solid red;}
+}
+.appDiv {
+    display: none;
+    opacity: 0.5;
+    position : absolute;
+    bottom : 30%;
+    right : 2%;
+}
+/* App link button */
+.appBtn {
+    font-size: 1.1em;
+    border: 2px solid #AD235E;
+    border-radius: 3em;
+    width: 3em;
+    height: 3em;
+    background: url("../img/app_button.png") no-repeat left;
+    background-size: 100% 100%;
+    animation-name: appBtnAnim;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+.appShow {
+    display: block !important;
+}
+
+
+
+/*
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.reloadButton {
+    background-color: blue;
+}    
+.startButton {
+    background-color: green;
+}
+.stopButton {
+    background-color: red;
+}
+.ButtonActive {
+    border-style: groove;
+    border-color: coral;
+    border-width: 7px;
+}
+.ButtonNotActive {
+    border-style: groove;
+    border-color: LightGray;
+    border-width: 7px;
+}
+*/
+/* Complely hide the audio player */
+/*
+audio {
+    display:none;
+}
+*/
+/* Prevent video elemnent from being operated outside of provided Stop/Start buttons */
+/*
+video {
+    pointer-events: none;
+}
+video::-webkit-media-controls {
+    display: none;
+}
+*/

@@ -1,0 +1,24 @@
+<!Doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/player.css">
+    
+    <script src="js/hls.js"></script>
+    <script src="js/player.js"></script>
+</head>
+<body>
+<h1>Player</h1>
+    <table>
+        <!-- <tr><td style="text-align: center;"><button onclick="location.reload(true);" class="button reloadButton">Reload</button></td></tr> -->
+        <tr><td style="text-align: center;"><button id="start" onclick="startPlay()" class="button startButton ButtonNotActive">Start</button><br /></td></tr>
+        <tr><td style="text-align: center;"><button id="stop" onclick="stopPlay()" class="button stopButton ButtonActive">Stop</button><br /></td></tr>
+    </table>
+
+    <audio id="audio"></audio><br />
+    <!-- Looped video prevents phone displays from going to sleep without user intervention -->
+    <video id="video" controls loop>
+        <source src="soundroom.m4v">
+    </video>
+</body>
+</html>
+
