@@ -10,7 +10,6 @@ RUN apk update && apk upgrade && \
     chmod +x /usr/local/bin/start.sh && \
     mkdir -p /var/www/html/lhls/audio && \
     chmod 777 /var/www/html/lhls/audio && \
-    echo "<?php phpinfo();?>" >/var/www/html/index.php && \
     mkdir -p /var/www/cgibin && chown -R apache.www-data /var/www && \
     sed -i 's#^DocumentRoot ".*#DocumentRoot "/var/www/html"#g' /etc/apache2/httpd.conf && \
     sed -i 's#AllowOverride [Nn]one#AllowOverride All#' /etc/apache2/httpd.conf && \

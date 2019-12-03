@@ -1,4 +1,5 @@
 lhls_web_server/root/var/www/html/lhls/js/hls.js
+lhls_web_server/root/var/www/html/lhls/audio/data
 lhls_encoder/root/usr/local/bin/ffmpeg
 ffmpeg/alsa-lib
 ffmpeg/fdk-aac
