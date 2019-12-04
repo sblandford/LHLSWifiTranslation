@@ -7,14 +7,18 @@ var gPlaying = false;
 var gLang = window.navigator.language.substring(0,2);
 
 
-if(Hls.isSupported()) {
-    // Low latency recepe
-    var config = {
+/*
+Possible parameters to reduce latency
         maxMaxBufferLength: 1,
         liveSyncDuration: 0.5,
         liveMaxLatencyDuration: 1,
         liveBackBufferLength: 0,
-        nudgeMaxRetry: 10
+*/
+
+if(Hls.isSupported()) {
+    // Low latency recepe
+    var config = {
+        nudgeMaxRetry: 100
     };    
     var hls = new Hls(config);
 }
@@ -113,6 +117,11 @@ function updateDisplay() {
                     chNameId.classList.remove('chNameDead');
                 }
                 startStopButtonId.innerText = LANG[gLang][(gPlayIntention)?"stop":"start"];
+                // Reload and start audio
+                if (gPlayIntention) {
+                    loadAudio();
+                    audio.play();
+                }
                 startStopButtonId.disabled = false;
             } else {
                 if (!chNameId.classList.contains('chNameDead')) {
@@ -170,12 +179,16 @@ window.onclick = function(event) {
 }
 
 
-function startPlay() {
+function loadAudio () {
     if(Hls.isSupported()) {
         // Reload the source to reset the buffer
         hls.loadSource("audio/" + localStorage.channel + "/media_0.m3u8");
         hls.attachMedia(audio);
-    }
+    }    
+}
+
+function startPlay() {
+    loadAudio();
     audio.play();
     var vidPlayer = document.getElementById('playing');
     if (vidPlayer) {
