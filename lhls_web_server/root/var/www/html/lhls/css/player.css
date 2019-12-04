@@ -109,6 +109,17 @@ button.ui {
 tr.stat {
     height:3em;
 }
+div.vidStopped {
+    opacity: 0.0;
+}
+div.vidStarted {
+    z-index: 2;
+    opacity: 0.7;
+    /* Add the blur effect */
+    filter: blur(6px);
+    -webkit-filter: blur(6px);
+}
+
 div.stat {
     /* display : none; */
     /* font-family: monospace; */

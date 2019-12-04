@@ -11,7 +11,7 @@
         <meta http-equiv="pragma" content="no-cache" />        
         
         <title>Translation Web Client</title>
-        <link rel="stylesheet" type="text/css" href="css/player.css?v=2">
+        <link rel="stylesheet" type="text/css" href="css/player.css?v=1">
                 
         <script src="js/hls.js"></script>
         <script src="js/lang.js"></script>
@@ -32,11 +32,20 @@
                 <tr class="ui"><td class="ui">
                     <div class="ui chName" id="chName">....</div>
                 </td></tr>
+
                 <tr class="ui stat"><td class="ui">
                     <div class="ui stat" id="stat">
                     ----
                     </div>
                 </td></tr>
+                <tr class="ui"><td class="ui">
+                    <div class="ui vidStopped" id="vid">
+                        <!-- Video is used to keep the display on. Unfortunately some phones stop playing HLS audio consistently when the screen is off -->
+                        <video loop id="playing">
+                            <source src="img/green.m4v" type="video/mp4">
+                        </video>
+                    </div>
+                </td></tr>                
                 <tr class="ui"><td class="ui">
                     <div class="ui">
                         <button onclick="startStopPlayerClick();" ontouchend="startStopPlayerTouchend();" class="ui startStopBtn" id="startStopButton" disabled>Start</button>

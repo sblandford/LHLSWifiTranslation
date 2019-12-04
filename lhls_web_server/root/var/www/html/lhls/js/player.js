@@ -125,8 +125,22 @@ function updateDisplay() {
     }
     var element = document.getElementById("chSelectList");
     element.innerHTML = listHtml;
-    document.getElementById("chSelectBtn").innerText = LANG[gLang]["select"];
-    document.getElementById("stat").innerText = "";
+    document.getElementById('chSelectBtn').innerText = LANG[gLang]["select"];
+    document.getElementById('stat').innerText = "";
+    var vidDivId = document.getElementById("vid");
+    if (vidDivId) {
+        if (gPlaying) {
+            if (vidDivId.classList.contains('vidStopped')) {
+                vidDivId.classList.remove('vidStopped');
+                vidDivId.classList.add('vidStarted');
+            }
+        } else {
+            if (vidDivId.classList.contains('vidStarted')) {
+                vidDivId.classList.remove('vidStarted');
+                vidDivId.classList.add('vidStopped');
+            }
+        }
+    }
 }
 
 //Drop down menu related
@@ -163,11 +177,19 @@ function startPlay() {
         hls.attachMedia(audio);
     }
     audio.play();
+    var vidPlayer = document.getElementById('playing');
+    if (vidPlayer) {
+        vidPlayer.play();
+    }
     gPlaying = true;
     updateDisplay();
 }
 function stopPlay() {
     audio.pause();
+    var vidPlayer = document.getElementById('playing');
+    if (vidPlayer) {
+        vidPlayer.pause();
+    }
     gPlaying = false;
     updateDisplay();
 }
