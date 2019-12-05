@@ -44,10 +44,11 @@ if [[ ! -f "$TOOLS_DIR/arm-rpi-linux-gnueabihf/bin/arm-rpi-linux-gnueabihf-gcc" 
     )
     ulimit -n 4096
     mkdir -p "$TOOLS_DIR/src"
+
     ct-ng build
 
     # sudo chown -R "$USER": .
-    chmod -R o+w .
+    chmod -R a+w .
 fi
 if ! echo "$PATH" | grep -qF "$TOOLS_DIR_BASENAME/arm-rpi-linux-gnueabihf/bin"; then
     export PATH="$PATH:$TOOLS_DIR/arm-rpi-linux-gnueabihf/bin"
