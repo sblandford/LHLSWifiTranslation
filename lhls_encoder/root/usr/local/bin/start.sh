@@ -6,7 +6,11 @@ PORTS_FILE="$TMPDIR/ports.txt"
 STREAMS_FILE="$TMPDIR/streams.txt"
 TRANSCODERS_FILE="$TMPDIR/transcoders.txt"
 PORTS_ENABLE_FILE="$TMPDIR/ports.run"
-FFMPEG="/usr/local/bin/ffmpeg"
+if arch | grep -qiF "arm"; then
+    FFMPEG="/usr/local/bin/ffmpeg_arm"
+else
+    FFMPEG="/usr/local/bin/ffmpeg"
+fi
 TRANSLOCKDIR="$TMPDIR/translock"
 
 endtime=$(( $( date "+%s" ) + TIMEOUT ))
