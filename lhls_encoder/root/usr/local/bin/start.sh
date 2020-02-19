@@ -100,6 +100,9 @@ stream_scanner () {
     while [[ -f "$PORTS_ENABLE_FILE" ]]; do
         if [[ -f "$PORTS_FILE" ]]; then 
             for port in $( cat "$PORTS_FILE" ); do
+                if [[ $port -lt $BASE_PORT ]]; then
+                    continue
+                fi
                 [[ -f "$PORTS_ENABLE_FILE" ]] || break
                 # Already an encoder running
                 if [[ -f "$TRANSCODERS_FILE" ]] && grep -q "$port" "$TRANSCODERS_FILE"; then

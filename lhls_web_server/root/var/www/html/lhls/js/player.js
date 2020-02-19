@@ -6,6 +6,15 @@ var gPlayIntention = false;
 var gPlaying = false;
 var gLang = window.navigator.language.substring(0,2);
 
+/* var m3uObj = {
+    content = "",
+    seq = 0,
+    digits = 0,
+    chunkLength = 0.0,
+    firstChunkDate = new Date(),
+    dateOfCapture = new Date()
+    
+} */
 
 /*
 Possible parameters to reduce latency
@@ -18,7 +27,8 @@ Possible parameters to reduce latency
 if(Hls.isSupported()) {
     // Low latency recepe
     var config = {
-        nudgeMaxRetry: 100
+        nudgeMaxRetry: 100,
+        debug: false
     };    
     var hls = new Hls(config);
 }
@@ -44,7 +54,7 @@ window.onload = function () {
         audio.src = 'hls/out.m3u8';
         audio.addEventListener('loadedmetadata',function() {
         });
-    }
+    }    
     pollStatus();
     setInterval(pollStatus, 5000);    
 };
@@ -188,8 +198,8 @@ function loadAudio () {
 }
 
 function startPlay() {
-    loadAudio();
-    audio.play();
+    //loadAudio();
+    //audio.play();
     var vidPlayer = document.getElementById('playing');
     if (vidPlayer) {
         vidPlayer.play();

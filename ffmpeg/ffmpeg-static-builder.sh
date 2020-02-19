@@ -65,7 +65,11 @@ if [[ ! -f "$TARGET_DIR/lib/libfdk-aac.a" ]]; then
     )
 fi
 if [[ ! -d "ffmpeg" ]]; then
-    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
+    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg --depth 1
+    (
+        cd ffmpeg
+        git fetch --unshallow
+    )
 fi
 (
     cd ffmpeg
