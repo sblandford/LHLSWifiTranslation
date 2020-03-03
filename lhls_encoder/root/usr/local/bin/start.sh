@@ -159,7 +159,7 @@ if [[ $( date "+%s" ) -ge $endtime ]]; then
     echo "Timeout waiting for web server at $WEBSERVER" >&2
     exit 1
 fi
-webserver_ip=$( nslookup lhls_web_server 2>/dev/null | grep "Address" | grep -Eo "([0-9]{1,3}\.){3}[0-9]{1,3}" )
+webserver_ip=$( nslookup lhls_web_server 2>/dev/null | grep "Address" | grep -Eo "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -Pv "^127\." )
 
 echo "Nic is $netp, Webserver ip is $webserver_ip"
 
