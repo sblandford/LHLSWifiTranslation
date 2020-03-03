@@ -5,6 +5,7 @@ set -e
 TARGET_DIR="$( pwd )/static_build"
 DOCKER_FFMPEG="lhls_encoder/root/usr/local/bin/ffmpeg"
 THREADS=$( grep -c "^processor" /proc/cpuinfo )
+REQUIRED_APPS="yasm make aclocal autoheader automake libtoolize autoconf git pkg-config"
 
 if [[ "$1" == "clean" ]]; then
     rm -rf "alsa-lib" "fdk-aac" "ffmpeg" "$TARGET_DIR"
@@ -16,10 +17,32 @@ if pwd | grep -qP "\s"; then
     exit 1
 fi
 
+check_apps () {
+    local app flunked
+    
+    flunked=""
+    for app in $( echo $REQUIRED_APPS ); do
+            if ! which $app >/dev/null 2>&1; then
+                echo "Required command, $app, not found in search path: $PATH"
+                if [ -x /usr/lib/command-not-found ]; then
+                    /usr/lib/command-not-found -- "$app"
+                elif [ -x /usr/share/command-not-found/command-not-found ]; then
+                    /usr/share/command-not-found/command-not-found -- "$app"
+                fi
+                flunked="yes"
+            fi
+    done
+    if [[ "$flunked" == "yes" ]]; then
+        exit 1
+    fi
+}
+
+check_apps
+
 mkdir -p "$TARGET_DIR"
 
 if [[ ! -d "alsa-lib" ]]; then
-    git clone git://git.alsa-project.org/alsa-lib.git alsa-lib
+    git clone --depth 1 git://git.alsa-project.org/alsa-lib.git alsa-lib
 fi
 if [[ ! -f "$TARGET_DIR/lib/libasound.a" ]]; then
     (
@@ -51,11 +74,12 @@ if [[ ! -f "$TARGET_DIR/lib/libfdk-aac.a" ]]; then
         cd fdk-aac
         make clean &>/dev/null || echo
         echo "FDK AAC config"
-        ./autogen.sh --host=arm-unknown-linux-gnueabi
         if [[ $CCPREFIX ]]; then
             # TODO Always compiling to x86 no matter what
+            ./autogen.sh --host=arm-unknown-linux-gnueabi
             ./configure --host=arm-rpi-linux-gnueabihf --prefix="$TARGET_DIR" --disable-shared
         else
+            ./autogen.sh
             ./configure --prefix="$TARGET_DIR" --disable-shared
         fi
         echo "FDK AAC compile"
@@ -65,22 +89,20 @@ if [[ ! -f "$TARGET_DIR/lib/libfdk-aac.a" ]]; then
     )
 fi
 if [[ ! -d "ffmpeg" ]]; then
-    git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg --depth 1
-    (
-        cd ffmpeg
-        git fetch --unshallow
-    )
+    git clone --depth 1 https://git.ffmpeg.org/ffmpeg.git ffmpeg
 fi
 (
     cd ffmpeg
     make clean &>/dev/null || echo
     echo "FFMEG Config"
+    echo "libmp3lame-dev(el) and libopus-dev(el) must be installed for this"
 
     if [[ $CCPREFIX ]]; then
         pkg_config=$( which pkg-config ) PKG_CONFIG_PATH="$TARGET_DIR/lib/pkgconfig" ./configure \
             --enable-cross-compile --cross-prefix=${CCPREFIX} --arch=armel --target-os=linux \
             --prefix="$TARGET_DIR" \
             --libdir="$TARGET_DIR/lib" \
+            --extra-libs=-lm \
             --extra-cflags="-I$TARGET_DIR/include" \
             --extra-ldflags="-L$TARGET_DIR/lib" \
             --extra-ldexeflags="-static" \
@@ -91,6 +113,7 @@ fi
         ./configure --prefix="$TARGET_DIR" \
             --extra-cflags="-I$TARGET_DIR/include" \
             --extra-ldflags="-L$TARGET_DIR/lib" \
+            --extra-libs=-lm \
             --extra-ldexeflags="-static" \
             --pkg-config-flags="--static" --disable-shared --enable-static \
             --enable-libmp3lame \
